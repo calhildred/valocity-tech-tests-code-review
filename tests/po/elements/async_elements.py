@@ -1,6 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from tests.po.elements.base_elements import BaseElement
-
+from tests import config
 
 class AsyncElement(BaseElement):
     """
@@ -10,7 +10,7 @@ class AsyncElement(BaseElement):
         WebDriverWait(self.browser, 10).until(
             lambda driver: len([e for e in driver.find_elements_by_css_selector(self.locator) if e.is_displayed()]
                                if visible_filter else driver.find_elements_by_css_selector(self.locator)),
-            "URL: {0} | Waiting for {1}, but didn't show up in time".format(
+            config.Error_check.format(
                 self.browser.current_url, self.locator
             )
         )

@@ -17,13 +17,13 @@ class BasePage(BrowserObject):
 
     def go_to_url(self):
         """
-        make a get request
+        Make a get request
         """
         url = config.TEST_ADDRESS
         self.browser.get(url)
 
     def get_current_url(self):
         """
-        Get current url.
+        Return current url.
         """
         return self.browser.current_url

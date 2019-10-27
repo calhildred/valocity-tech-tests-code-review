@@ -6,6 +6,9 @@ from tests import config
 
 
 class SeleniumWebDriver(object):
+    """
+    SeleniumWebDriver Initialization
+    """
 
     def __new__(cls):
         if not hasattr(cls, 'instance'):

@@ -7,7 +7,11 @@ from tests.po.elements.base_elements import ElementCollection
 
 
 class HomeElements(ElementCollection):
+    """
+    Represents elements featured on the Home page
+    """
 
     def __init__(self):
         self.search_text = AsyncElement('input[aria-label="Search"]')
         self.search_button = AsyncElement('input[aria-label="Google Search"]')
+

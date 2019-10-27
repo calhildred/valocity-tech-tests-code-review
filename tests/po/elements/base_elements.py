@@ -1,3 +1,4 @@
+from tests import config
 from selenium.common.exceptions import TimeoutException, InvalidElementStateException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
@@ -26,7 +27,7 @@ class BaseElement(BrowserObject):
     def __call__(self, value=None, visible_filter=False):
         WebDriverWait(self.browser, 1).until(
             lambda driver: len(driver.find_elements_by_css_selector(self.locator)),
-            "URL: {0} | Waiting for {1}, but didn't show up in time".format(self.browser.current_url, self.locator)
+            config.Error_check.format(self.browser.current_url, self.locator)
         )
         elements = self.browser.find_elements_by_css_selector(self.locator)
         return [e for e in elements if e.is_displayed()] if visible_filter else elements
@@ -34,7 +35,7 @@ class BaseElement(BrowserObject):
     # -------- action method  --------#
     def click_field(self, index=0):
         """
-        find a field on the page to click.
+        Find a field on the page to click, then clicks it.
         :param index: which field you want to fill
         """
         try:
@@ -47,9 +48,9 @@ class BaseElement(BrowserObject):
 
     def fill_field(self, value, index=0):
         """
-        find a field on the page to input value.
-        :param index: which field you want to fill
-        :param value: value to be filled into the field
+        Find a field on the page to input value, then inputs given value into it
+        :param index: Which field you want to fill
+        :param value: Value to be filled into the field
         """
         try:
             field = self()[index]
@@ -65,7 +66,7 @@ class BaseElement(BrowserObject):
     def key_down(self, key):
         """
         Key down action on website
-        :param key: Key
+        :param key: Key that is being used
         """
         actions = ActionChains(self.browser)
         actions.key_down(key)
@@ -74,7 +75,7 @@ class BaseElement(BrowserObject):
 
 class ElementCollection(BrowserObject):
     """
-    Base page class
+    Base page class representing multiple elements
     """
 
     def set_browser(self, browser):
